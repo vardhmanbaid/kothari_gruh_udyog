@@ -82,7 +82,7 @@ export default function ItemList() {
         <div
           style={{
             overflow: 'auto',
-            height: '76vh',
+            height: '75vh',
           }}
           ref={divRef}
           onScroll={handleScroll}

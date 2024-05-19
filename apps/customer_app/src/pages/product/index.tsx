@@ -121,7 +121,7 @@ export default function Products() {
           container
           spacing={1}
           sx={{
-            maxHeight: '80vh',
+            maxHeight: '75vh',
             overflow: 'auto',
           }}
           ref={divRef}
@@ -131,7 +131,7 @@ export default function Products() {
             ?.map((i) => i.itemsCollection.edges)
             .flat()
             .map(({ node: product }: any) => (
-              <Grid item key={product.id} xs={12} sm={6} md={6}>
+              <Grid item key={product.id} xs={6} sm={6} md={6}>
                 <Card
                   onClick={() => {
                     handleOpen(product as itemProps);

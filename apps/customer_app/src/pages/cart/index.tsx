@@ -55,7 +55,9 @@ export default function Cart() {
       )
       .join('');
     let orderParams = new URLSearchParams({
-      phone: '919342110690',
+      phone: address.toLowerCase().includes('erode')
+        ? import.meta.env.VITE_SUNITA_NUMBER
+        : import.meta.env.VITE_NAGARMAL_NUMBER,
       text: `${orderMessage}\nTotal Price: *₹${totalPrice}/-*\n\nDeliver @ \n ${address}`,
     });
     // Construct the complete WhatsApp URL

@@ -18,9 +18,9 @@ import { useNavigate } from 'react-router-dom';
 const ProfileContact: Array<{ node: IconType; href: string }> = [
   {
     node: FiPhoneCall,
-    href: 'tel:+919342110690',
+    href: `tel:+${import.meta.env.VITE_NAGARMAL_NUMBER}`,
   },
-  { node: FaWhatsapp, href: 'https://api.whatsapp.com/send?phone=919342110690' },
+  { node: FaWhatsapp, href: `https://api.whatsapp.com/send?phone=${import.meta.env.VITE_NAGARMAL_NUMBER}` },
   { node: FaLocationDot, href: 'https://maps.app.goo.gl/6tpVpz4xqpmY883X6' },
   { node: FaRupeeSign, href: 'upi://pay?pa=vyapar.169688010748@hdfcbank&pn=Kothari%20Gruh%20Udyog&cu=INR' },
 ];

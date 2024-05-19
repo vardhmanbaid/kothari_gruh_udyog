@@ -21,14 +21,8 @@ export default function AdminHome() {
 
   return (
     <AppLayout>
-      <Container sx={{ minHeight: '100vh', overflow: 'hidden', backgroundColor: theme.palette.background.default }}>
-        <Grid
-          container
-          direction={'column'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          sx={{ minHeight: '100vh' }}
-        >
+      <Container sx={{ height: '100vh', overflow: 'hidden', backgroundColor: theme.palette.background.default }}>
+        <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} sx={{ height: '90%' }}>
           <Button
             variant='outlined'
             startIcon={<GoogleIcon />}
