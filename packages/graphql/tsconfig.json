@@ -1,0 +1,6 @@
+{
+  "extends": "tsconfig/react-library.json",
+  "compilerOptions": {
+    "types": ["vite/client"]
+  }
+}

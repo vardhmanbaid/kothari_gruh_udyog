@@ -1,0 +1,36 @@
+{
+  "name": "@core/{{kebabCase name}}",
+  "version": "0.0.0",
+  {{#if isLibBuild}}
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  {{else}}
+  "main": "./index.ts",
+  {{/if}}
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  {{#if isLibBuild}}
+  "files": [
+    "dist"
+  ],
+  {{/if}}
+  "scripts": {
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix",
+    "clean": "rm -rf node_modules dist .turbo"{{#if isLibBuild}},
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+    {{/if}}
+  },
+  "dependencies":{},
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "tsconfig": "*"{{#if isLibBuild}},
+    "tsup": "^6.7.0"
+    {{/if}}
+  },
+  "peerDependencies": {}
+}

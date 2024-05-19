@@ -1,0 +1,53 @@
+{
+  "name": "customer_app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host --open",
+    "dev:production": "vite --host --open --mode production",
+    "dev:staging": "vite --host --open --mode staging",
+    "build": "rm -rf dist && vite build",
+    "build:development": "vite build --mode development",
+    "build:staging": "vite build --mode staging",
+    "clean": "rm -rf node_modules && rm -rf dist && rm -rf dev-dist",
+    "lint": "eslint \"src/**/*.ts*\" --fix",
+    "preview": "vite preview --host --open",
+    "firebase:deploy": "firebase deploy --only hosting"
+  },
+  "dependencies": {
+    "@core/alias": "^0.0.0",
+    "@core/envconfig": "^0.0.0",
+    "@core/graphql": "^0.0.0",
+    "@core/routes": "^0.0.0",
+    "@core/store": "^0.0.0",
+    "@core/theme": "^0.0.0",
+    "@core/utils": "^0.0.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/poppins": "^4.5.10",
+    "@mui/icons-material": "^5.15.17",
+    "@mui/lab": "^5.0.0-alpha.104",
+    "@mui/material": "^5.15.16",
+    "@mui/styles": "^5.15.16",
+    "@supabase/supabase-js": "^2.43.2",
+    "ahooks": "^3.7.11",
+    "firebase": "^10.11.1",
+    "notistack": "^3.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^4.12.0",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-router-dom": "^6.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.1",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "eslint-config-custom": "^0.0.0",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "tsconfig": "^0.0.0",
+    "vite": "^4.5.3"
+  }
+}

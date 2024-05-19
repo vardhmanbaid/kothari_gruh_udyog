@@ -1,0 +1,10 @@
+import type { Options } from 'tsup';
+
+const isWatch = process.argv.includes('--watch');
+
+export const tsup: Options = {
+  clean: !isWatch, // clean up the dist folder unless we're in watch mode
+  dts: true, // generate dts files
+  format: ['esm'], // generate cjs and esm files
+  entryPoints: ['styles'],
+};

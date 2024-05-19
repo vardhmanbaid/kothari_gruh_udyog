@@ -1,0 +1,6 @@
+{
+    "alias": {
+        "ur": "docs: update README",
+        "lu": "chore(eslint-config-custom): :hammer: lint config update"
+    }
+}

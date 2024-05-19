@@ -1,0 +1,37 @@
+import type { SxProps, Theme } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+{{#if isForwardRef}}import { forwardRef } from 'react';{{/if}}
+
+
+import { {{camelCase name}}Style } from './style';
+
+export interface {{pascalCase name}}Props {
+  className?: string;
+  sx?: SxProps<Theme>;
+};
+
+
+export const {{pascalCase name}}={{#if isForwardRef}}forwardRef((props: {{pascalCase name}}Props, ref: React.Ref<HTMLElement>): JSX.Element =>{{else}}(props: {{pascalCase name}}Props): JSX.Element =>{{/if}} {
+  const { className = '', sx = {}, ...rest } = props;
+
+  return (
+    <Box
+      sx={[
+        {
+          ...{{camelCase name}}Style.rootSx,
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
+      className={`${className}`}
+      {{#if isForwardRef}} ref={ref} {{/if}}
+      {...rest}
+    >
+      <Typography>{{pascalCase name}} component</Typography>
+    </Box>
+  );
+}
+
+{{#if isForwardRef}}); {{/if}}
+
+{{#if isForwardRef}}{{pascalCase name}}.displayName = '{{pascalCase name}}';{{/if}}
+

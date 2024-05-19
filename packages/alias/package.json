@@ -1,0 +1,19 @@
+{
+  "name": "@core/alias",
+  "version": "0.0.0",
+  "main": "./index.js",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint \"**/*.{js,jsx}\" --fix",
+    "clean": " rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "^0.0.0",
+    "vite": "^4.5.3"
+  }
+}

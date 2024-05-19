@@ -1,0 +1,28 @@
+{
+  "name": "@core/store",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix",
+    "clean": " rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "@core/logger": "^0.0.0",
+    "@core/utils": "^0.0.0",
+    "notistack": "^3.0.1",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "^0.0.0",
+    "tsconfig": "^0.0.0"
+  },
+  "peerDependencies": {
+    "notistack": "^3.0.1",
+    "zustand": "^4.5.2"
+  }
+}

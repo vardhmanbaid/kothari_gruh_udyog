@@ -1,0 +1,26 @@
+{
+  "extends": "tsconfig/react-library.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@atoms/*": [
+        "atoms/*"
+      ],
+      "@atoms": [
+        "atoms"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@components": [
+        "components"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+    },
+  }
+}

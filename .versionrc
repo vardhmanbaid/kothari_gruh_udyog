@@ -1,0 +1,48 @@
+{
+    "types": [
+        {
+            "type": "feat",
+            "section": "Features"
+        },
+        {
+            "type": "fix",
+            "section": "Bug Fixes"
+        },
+        {
+            "type": "chore",
+            "section": "Chores"
+        },
+        {
+            "type": "docs",
+            "section": "Docs"
+        },
+        {
+            "type": "style",
+            "hidden": true
+        },
+        {
+            "type": "refactor",
+            "section": "Refactor"
+        },
+        {
+            "type": "perf",
+            "hidden": true
+        },
+        {
+            "type": "test",
+            "hidden": true
+        }
+    ],
+    "commitAll": true,
+    "header": "# Changelog\n\nAll notable changes to this boilerplate will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.\n\n",
+    "typesOrder": [
+        "feat",
+        "fix",
+        "chore",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test"
+    ]
+}
