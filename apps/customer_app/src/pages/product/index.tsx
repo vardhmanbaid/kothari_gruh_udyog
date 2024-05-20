@@ -3,7 +3,6 @@ import { itemProps } from '@core/store';
 import {
   Grid,
   Card,
-  Container,
   Stack,
   Box,
   Typography,
@@ -64,7 +63,7 @@ export default function Products() {
   const handleScroll = () => {
     if (divRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = divRef.current;
-      if (scrollTop + clientHeight >= scrollHeight && hasNextPage) {
+      if (scrollTop + clientHeight >= scrollHeight - 200 && hasNextPage) {
         fetchNextPage();
       }
     }
@@ -77,10 +76,23 @@ export default function Products() {
   const theme = useTheme();
 
   return (
-    <AppLayout>
-      <Container sx={{ minHeight: '100vh', overflow: 'hidden', backgroundColor: theme.palette.background.default }}>
-        <Stack direction='row' spacing={1} sx={{ my: 1 }}>
+    <AppLayout
+      sx={{
+        height: '100%',
+      }}
+      childrenWrapperProps={{
+        sx: {
+          p: 2,
+          height: '90%',
+          overflow: 'hidden',
+          backgroundColor: theme.palette.background.default,
+        },
+      }}
+    >
+      <>
+        <Stack direction='row' spacing={1} sx={{ mb: 1 }}>
           <TextField
+            fullWidth
             sx={{
               '& .MuiOutlinedInput-root': {
                 borderRadius: '50px', // Elliptical border radius
@@ -112,16 +124,12 @@ export default function Products() {
             <AddCircleOutlineSharpIcon />
           </IconButton>
         </Stack>
-        {(isLoading || isFetchingNextPage) && (
-          <div style={{ paddingBottom: 5 }}>
-            <LinearProgress />
-          </div>
-        )}
+        <Box sx={{ mb: 2 }}>{(isLoading || isFetchingNextPage) && <LinearProgress />}</Box>
         <Grid
           container
           spacing={1}
           sx={{
-            maxHeight: '75vh',
+            height: 'calc(var(--vh, 1vh) * 82)',
             overflow: 'auto',
           }}
           ref={divRef}
@@ -131,7 +139,7 @@ export default function Products() {
             ?.map((i) => i.itemsCollection.edges)
             .flat()
             .map(({ node: product }: any) => (
-              <Grid item key={product.id} xs={6} sm={6} md={6}>
+              <Grid item key={product.id} xs={6} sm={3} md={2}>
                 <Card
                   onClick={() => {
                     handleOpen(product as itemProps);
@@ -180,7 +188,7 @@ export default function Products() {
         <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
           <UpsertProduct item={item} setItem={setItem} categories={categories} handleClose={handleClose} />
         </Dialog>
-      </Container>
+      </>
     </AppLayout>
   );
 }

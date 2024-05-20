@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import { ItemCard } from '@core/ui/atoms';
-import { Container, Stack, LinearProgress, useTheme, TextField, IconButton, Fab } from '@mui/material';
+import { Stack, LinearProgress, useTheme, TextField, IconButton, Fab, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
@@ -38,7 +38,7 @@ export default function ItemList() {
   const handleScroll = () => {
     if (divRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = divRef.current;
-      if (scrollTop + clientHeight >= scrollHeight && hasNextPage) {
+      if (scrollTop + clientHeight >= scrollHeight - 200 && hasNextPage) {
         fetchNextPage();
       }
     }
@@ -49,15 +49,27 @@ export default function ItemList() {
   }, [search]);
 
   return (
-    <AppLayout>
-      <Container sx={{ height: '100vh', overflow: 'hidden', backgroundColor: theme.palette.background.default }}>
+    <AppLayout
+      sx={{
+        height: '100%',
+      }}
+      childrenWrapperProps={{
+        sx: {
+          p: 2,
+          height: '90%',
+          overflow: 'hidden',
+          backgroundColor: theme.palette.background.default,
+        },
+      }}
+    >
+      <>
         <TextField
+          fullWidth
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: '50px', // Elliptical border radius
               height: '2.5em',
             },
-            'mt': 1,
             'mb': 1,
           }}
           value={search}
@@ -74,15 +86,11 @@ export default function ItemList() {
             ),
           }}
         />
-        {(isLoading || isFetchingNextPage) && (
-          <div style={{ paddingBottom: 5 }}>
-            <LinearProgress />
-          </div>
-        )}
-        <div
-          style={{
+        <Box sx={{ mb: 2 }}>{(isLoading || isFetchingNextPage) && <LinearProgress />}</Box>
+        <Box
+          sx={{
+            height: 'calc(var(--vh, 1vh) * 82)',
             overflow: 'auto',
-            height: '75vh',
           }}
           ref={divRef}
           onScroll={handleScroll}
@@ -102,7 +110,7 @@ export default function ItemList() {
                 />
               ))}
           </Stack>
-        </div>
+        </Box>
         {Object.entries(cart).length > 0 && (
           <div
             style={{ position: 'relative' }}
@@ -120,7 +128,7 @@ export default function ItemList() {
             </Fab>
           </div>
         )}
-      </Container>
+      </>
     </AppLayout>
   );
 }

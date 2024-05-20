@@ -26,5 +26,6 @@ dist-ssr
 
 stats.html
 
+.firebase/
 .env
 .env.*

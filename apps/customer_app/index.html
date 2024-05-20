@@ -4,15 +4,23 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/just_logo.png" />
-  
+
   <meta property="og:title" content="Kothari Gruh Udyog" />
   <meta property="og:description" content="Explore the rich flavors of authentic Rajasthani cuisine." />
   <meta property="og:image" content="%PUBLIC_URL%/just_logo.png" />
-  <meta property="og:type" content="website"> 
+  <meta property="og:type" content="website">
   <meta property="og:url" content="%PUBLIC_URL%/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KothariGruhUdyog</title>
+
+  <script>
+    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  </script>
+
 </head>
 
 <body>

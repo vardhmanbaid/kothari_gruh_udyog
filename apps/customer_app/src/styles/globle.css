@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
   width: 6px !important;
 } /* this targets the default scrollbar (compulsory) */
 
@@ -54,6 +54,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   padding: 0;
   overflow: hidden;
 }

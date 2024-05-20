@@ -17,10 +17,15 @@ function RootLayout(): JSX.Element {
   }, [route]);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ height: '100vh', width: 'calc(100vh - 25%)' }}>
-        <Outlet />
-      </div>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+      }}
+    >
+      <Outlet />
     </Box>
   );
 }
