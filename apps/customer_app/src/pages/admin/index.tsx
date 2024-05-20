@@ -20,26 +20,41 @@ export default function AdminHome() {
   const theme = useTheme();
 
   return (
-    <AppLayout>
-      <Container sx={{ height: '100vh', overflow: 'hidden', backgroundColor: theme.palette.background.default }}>
-        <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'} sx={{ height: '90%' }}>
-          <Button
-            variant='outlined'
-            startIcon={<GoogleIcon />}
-            onClick={() => {
-              supabase.auth.signInWithOAuth({
-                provider: 'google',
-                options: {
-                  redirectTo: `${window.location.origin}${webRoutes.admin}`,
-                },
-              });
-            }}
-            size='large'
-          >
-            Signin
-          </Button>
-        </Grid>
-      </Container>
+    <AppLayout
+      sx={{
+        width: '100vw',
+      }}
+      childrenWrapperProps={{
+        sx: {
+          p: 2,
+          overflow: 'hidden',
+          backgroundColor: theme.palette.background.default,
+        },
+      }}
+    >
+      <>
+        <Button
+          variant='outlined'
+          startIcon={<GoogleIcon />}
+          onClick={() => {
+            supabase.auth.signInWithOAuth({
+              provider: 'google',
+              options: {
+                redirectTo: `${window.location.origin}${webRoutes.admin}`,
+              },
+            });
+          }}
+          size='large'
+          sx={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          Signin
+        </Button>
+      </>
     </AppLayout>
   );
 }

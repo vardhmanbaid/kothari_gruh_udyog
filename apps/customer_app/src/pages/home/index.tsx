@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { Avatar, Button, Paper, Stack, Typography, useTheme } from '@mui/material';
+import { Avatar, Button, Paper, Stack, Typography, useTheme, Box } from '@mui/material';
 import KGULogo from '@assets/just_logo.png';
 import AamPappad from '@assets/Delicious.png';
 import Bhujiya from '@assets/items/parsumal_bhujiya.jpg';
@@ -31,64 +31,66 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <Stack spacing={0} justifyContent={'flex-start'}>
-      <Stack direction={'row'} sx={{ backgroundColor: theme.palette.primary.main }} spacing={0}>
-        <img src={KGULogo} style={{ height: 60 }} />
-        <Typography sx={{ fontSize: '1.95em', mt: 2, color: '#fff' }} variant='h4'>
-          {'Kothari Gruh Udyog'}
-        </Typography>
-      </Stack>
-      <div>
-        <Carousel
-          animation='slide'
-          interval={1500}
-          duration={1000}
-          swipe={false}
-          indicators={false}
-          fullHeightHover
-          navButtonsAlwaysInvisible
-        >
-          {[AamPappad, Papad, Bhujiya, Loya].map((item: any, index: number) => (
-            <Paper
-              elevation={0}
-              key={index + 1}
-              sx={{ height: '45vh' }}
-              onClick={() => {
-                navigate(webRoutes.itemList);
-              }}
-            >
-              <img src={item} style={{ height: 'inherit', width: '100%', objectFit: 'fill' }} />
-            </Paper>
-          ))}
-        </Carousel>
-      </div>
-      <Button
-        fullWidth
-        variant='contained'
-        size='large'
-        sx={{ borderRadius: 0 }}
-        component='a'
-        href={webRoutes.itemList}
-      >
-        Click to Place Order!
-      </Button>
-      <Paper elevation={0} sx={{ padding: 1, backgroundColor: 'transparent' }}>
-        <Avatar
-          alt='Nagarmal Kothari'
-          src={Nagarmal}
-          sx={{ width: 156, height: 156, mx: 'auto', mt: '-30', boxShadow: '0 0 10px 0 rgba(33, 150, 243, 0.7)' }}
-        />
-        <Typography sx={{ textAlign: 'center' }} variant='h5'>
-          Nagarmal Kothari
-        </Typography>
-        <Stack direction={'row'} justifyContent={'center'} alignContent={'center'} sx={{ padding: 0.5 }}>
-          {ProfileContact.map(({ node: Node, href }, index) => (
-            <Button key={index + 1} component={'a'} href={href} target='_blank' disableFocusRipple disableRipple>
-              <Node style={{ fontSize: 70 }} />
-            </Button>
-          ))}
+    <Box sx={{ width: '100vw' }}>
+      <Stack spacing={0} justifyContent={'flex-start'}>
+        <Stack direction={'row'} sx={{ backgroundColor: theme.palette.primary.main }} spacing={0}>
+          <img src={KGULogo} style={{ height: 60 }} />
+          <Typography sx={{ fontSize: '1.95em', mt: 2, color: '#fff' }} variant='h4'>
+            {'Kothari Gruh Udyog'}
+          </Typography>
         </Stack>
-      </Paper>
-    </Stack>
+        <div>
+          <Carousel
+            animation='slide'
+            interval={5500}
+            duration={5000}
+            swipe={false}
+            indicators={false}
+            fullHeightHover
+            navButtonsAlwaysInvisible
+          >
+            {[AamPappad, Papad, Bhujiya, Loya].map((item: any, index: number) => (
+              <Paper
+                elevation={0}
+                key={index + 1}
+                sx={{ height: '45vh' }}
+                onClick={() => {
+                  navigate(webRoutes.itemList);
+                }}
+              >
+                <img src={item} style={{ height: 'inherit', width: '100%', objectFit: 'fill' }} />
+              </Paper>
+            ))}
+          </Carousel>
+        </div>
+        <Button
+          fullWidth
+          variant='contained'
+          size='large'
+          sx={{ borderRadius: 0 }}
+          component='a'
+          href={webRoutes.itemList}
+        >
+          Click to Place Order!
+        </Button>
+        <Paper elevation={0} sx={{ padding: 1, backgroundColor: 'transparent' }}>
+          <Avatar
+            alt='Nagarmal Kothari'
+            src={Nagarmal}
+            sx={{ width: 156, height: 156, mx: 'auto', mt: '-30', boxShadow: '0 0 10px 0 rgba(33, 150, 243, 0.7)' }}
+          />
+          <Typography sx={{ textAlign: 'center' }} variant='h5'>
+            Nagarmal Kothari
+          </Typography>
+          <Stack direction={'row'} justifyContent={'center'} alignContent={'center'} sx={{ padding: 0.5 }}>
+            {ProfileContact.map(({ node: Node, href }, index) => (
+              <Button key={index + 1} component={'a'} href={href} target='_blank' disableFocusRipple disableRipple>
+                <Node style={{ fontSize: 70 }} />
+              </Button>
+            ))}
+          </Stack>
+        </Paper>
+      </Stack>
+    </Box>
   );
 }
