@@ -24,6 +24,7 @@ export const FETCH_ITEM_LIST = `query ($limit: Int, $cursor: Cursor, $filter: it
             name
           }
           is_active
+          is_out_of_stock
           created_at
           updated_at
         }

@@ -1,9 +1,18 @@
-import { SxProps, Theme, Card, CardMedia, CardContent, Typography, IconButton, TextField, Stack } from '@mui/material';
+import {
+  SxProps,
+  Theme,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  IconButton,
+  TextField,
+  Stack,
+  Box,
+} from '@mui/material';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 import RemoveCircleSharpIcon from '@mui/icons-material/RemoveCircleSharp';
 import { CartStateProps, itemProps } from '@core/store/customer_app';
-import { useLocation } from 'react-router-dom';
-import { webRoutes } from '@core/routes';
 
 export interface ItemCardProps extends itemProps {
   className?: string;
@@ -16,26 +25,52 @@ export interface ItemCardProps extends itemProps {
 
 export function ItemCard(props: ItemCardProps): JSX.Element {
   const { className = '', sx = {}, cart, setItemQuantity, addCartItem, removeCartItem, ...rest } = props;
-  const location = useLocation();
+  const isOutOfStock = rest.is_out_of_stock;
+
   return (
     <Card
       className={`${className}`}
-      sx={[{ display: 'flex', borderRadius: 2 }, ...(Array.isArray(sx) ? sx : [sx])]}
+      sx={[
+        {
+          display: 'flex',
+          borderRadius: 2,
+          opacity: isOutOfStock ? 0.7 : 1,
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
       elevation={1}
     >
-      <CardMedia
-        component='img'
-        onError={(e: any) => {
-          e.target.onerror = null;
-          e.target.src = 'https://www.feed-image-editor.com/sites/default/files/perm/wysiwyg/image_not_available.png';
-        }}
-        image={
-          rest?.image_src ??
-          'https://www.feed-image-editor.com/sites/default/files/perm/wysiwyg/image_not_available.png'
-        }
-        alt={rest?.name}
-        sx={{ width: '35%' }}
-      />
+      <Box sx={{ position: 'relative', width: '35%' }}>
+        <CardMedia
+          component='img'
+          onError={(e: any) => {
+            e.target.onerror = null;
+            e.target.src = 'https://www.feed-image-editor.com/sites/default/files/perm/wysiwyg/image_not_available.png';
+          }}
+          image={
+            rest?.image_src ??
+            'https://www.feed-image-editor.com/sites/default/files/perm/wysiwyg/image_not_available.png'
+          }
+          alt={rest?.name}
+          sx={{ width: '100%', opacity: isOutOfStock ? 0.7 : 1 }}
+        />
+        {isOutOfStock && (
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'rgba(0, 0, 0, 0.5)',
+              color: 'white',
+              padding: '4px 8px',
+              borderRadius: 1,
+            }}
+          >
+            <Typography variant='caption' noWrap>Out of Stock</Typography>
+          </Box>
+        )}
+      </Box>
       <Stack direction='column' sx={{ flex: '1 0 auto' }}>
         <CardContent sx={{ flex: '1 0 auto', pt: 1, pb: 0, pl: 1, pr: 0 }}>
           <Typography variant='body2' component={'div'} sx={{ fontSize: '1.10em', fontWeight: 500 }}>
@@ -55,6 +90,7 @@ export function ItemCard(props: ItemCardProps): JSX.Element {
               onClick={() => {
                 removeCartItem && removeCartItem({ ...rest, quantity: rest?.increment_by ?? 1 });
               }}
+              disabled={isOutOfStock}
               disableRipple
               disableTouchRipple
               disableFocusRipple
@@ -69,6 +105,7 @@ export function ItemCard(props: ItemCardProps): JSX.Element {
                 let { value } = event.target;
                 setItemQuantity && setItemQuantity({ ...rest, quantity: Number(value) });
               }}
+              disabled={isOutOfStock}
               inputProps={{ sx: { textAlign: 'center' } }}
               type='number'
               size='small'
@@ -78,6 +115,7 @@ export function ItemCard(props: ItemCardProps): JSX.Element {
               onClick={() => {
                 addCartItem && addCartItem({ ...rest, quantity: rest?.increment_by ?? 1 });
               }}
+              disabled={isOutOfStock}
               disableRipple
               disableTouchRipple
               disableFocusRipple

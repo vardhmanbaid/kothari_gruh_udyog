@@ -6,6 +6,8 @@ export interface supabaseProps {
   supabase: SupabaseClient;
 }
 
-export const useSupabase = create<supabaseProps>((set, get) => ({
-  supabase: createClient(envConfig.supabaseUrl, envConfig.supabaseApiKey),
-}));
+export const supabaseClient = createClient(envConfig.supabaseUrl, envConfig.supabaseApiKey);
+
+export const useSupabase = create<supabaseProps>((set, get) => {
+  return { supabase: supabaseClient };
+});

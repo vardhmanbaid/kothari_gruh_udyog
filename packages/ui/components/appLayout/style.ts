@@ -5,7 +5,9 @@ interface AppLayoutStyleProps {
 }
 
 export const appLayoutStyle: AppLayoutStyleProps = {
-  rootSx: {},
+  rootSx: {
+    width: '100vw',
+  },
   childrenSx: {
     backgroundColor: 'grey.100',
   },

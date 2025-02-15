@@ -167,6 +167,14 @@ export default function Products() {
                       variant='filled'
                       color={product?.is_active ? 'primary' : 'error'}
                     />
+                    {product?.is_out_of_stock && (
+                      <Chip
+                        label={'Out of Stock'}
+                        sx={{ position: 'absolute', top: 55, right: 10 }}
+                        variant='filled'
+                        color={'error'}
+                      />
+                    )}
                   </Box>
                   <Stack spacing={0} sx={{ p: 1 }}>
                     <Typography variant='body1' component={'div'} sx={{ fontWeight: 500 }}>
@@ -186,7 +194,12 @@ export default function Products() {
             ))}
         </Grid>
         <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
-          <UpsertProduct item={item} setItem={setItem} categories={categories} handleClose={handleClose} />
+          <UpsertProduct
+            item={{ ...item, increment_by: 1 }}
+            setItem={setItem}
+            categories={categories}
+            handleClose={handleClose}
+          />
         </Dialog>
       </>
     </AppLayout>

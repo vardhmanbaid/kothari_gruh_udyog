@@ -26,12 +26,13 @@ export default function ItemList() {
 
   const theme = useTheme();
 
-  const { isLoading, data, refetch, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+  const { isLoading, isError, error, data, refetch, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['itemsCollection', { search }],
     fetchProducts,
     {
       keepPreviousData: true,
       getNextPageParam: (lastPage) => lastPage.itemsCollection.pageInfo.endCursor ?? false,
+      retry: false,
     }
   );
 
@@ -47,6 +48,8 @@ export default function ItemList() {
   useEffect(() => {
     refetch();
   }, [search]);
+
+  const itemsList = data?.pages?.flatMap((i) => i.itemsCollection.edges).map((i) => i.node);
 
   return (
     <AppLayout
@@ -96,10 +99,12 @@ export default function ItemList() {
           onScroll={handleScroll}
         >
           <Stack direction={'column'} justifyContent={'flex-start'} spacing={1}>
-            {data?.pages
-              ?.map((i) => i.itemsCollection.edges)
-              .flat()
-              .map(({ node: item }: any) => (
+            {isError && (
+              <Box sx={{ p: 2, textAlign: 'center', color: 'error.main' }}>Technical issue! Please contact admin!</Box>
+            )}
+            {itemsList?.length == 0 && <Box sx={{ p: 2, textAlign: 'center' }}>No products found!</Box>}
+            {itemsList?.length! > 0 &&
+              itemsList?.map((item: any) => (
                 <ItemCard
                   key={item.id}
                   {...item}

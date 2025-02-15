@@ -16,6 +16,7 @@ export interface itemProps {
   quantity?: number;
   base_uom: string;
   increment_by?: number;
+  is_out_of_stock?: boolean;
   is_active?: boolean;
   created_at?: Date | string;
   updated_at?: Date | string;
@@ -46,7 +47,7 @@ export const useCart = create<CartProps>()(
         cart[id] = {
           ...rest,
           id,
-          quantity,
+          quantity: Number(quantity),
         };
         set({
           cart,
@@ -59,7 +60,7 @@ export const useCart = create<CartProps>()(
         cart[id] = {
           ...rest,
           id,
-          quantity: (cart[id]?.quantity ?? 0) + quantity!,
+          quantity: Number(cart[id]?.quantity ?? 0) + Number(quantity)!,
         };
         set({
           cart,
@@ -72,7 +73,7 @@ export const useCart = create<CartProps>()(
         if (cart[id]?.quantity! > 0) {
           cart[id] = {
             ...cart[id],
-            quantity: cart[id]?.quantity! - quantity!,
+            quantity: Number(cart[id]?.quantity)! - Number(quantity)!,
           };
         }
         if (cart[id]?.quantity! == 0) {

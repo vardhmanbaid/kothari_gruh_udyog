@@ -1,5 +1,3 @@
-# Crayond's Monorepo Boilerplate - TS
-
 This repository serves as a complete boilerplate for setting up a monorepo project with the help of **TurboRepo**, a powerful tool for managing monorepositories. The boilerplate comes pre-configured with a set of best practices for organizing code, managing dependencies, and building multiple packages or modules within a single repository, all while using TypeScript as the primary programming language and other essential tooling already set up for a seamless development experience.
 
 ## What's inside?

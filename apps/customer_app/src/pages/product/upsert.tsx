@@ -5,6 +5,8 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   SelectChangeEvent,
   Stack,
@@ -20,6 +22,7 @@ import { ItemCard } from '@core/ui/atoms';
 import { itemProps, useSupabase } from '@core/store';
 import { ItemCardProps } from '@core/ui/atoms/itemCard';
 import { enqueueSnackbar } from 'notistack';
+import Grid2 from '@mui/material/Unstable_Grid2';
 
 const filter = createFilterOptions<any>();
 
@@ -36,8 +39,8 @@ export const UpsertProduct = (props: upsertProps) => {
 
   const modifyItem = (event: React.ChangeEvent | SelectChangeEvent<typeof item.category_id>) => {
     let { id, name, value } = event.target as any;
-    if (id == 'is_active') {
-      value = !item.is_active;
+    if (['is_active', 'is_out_of_stock'].includes(id)) {
+      value = !item[id as keyof itemProps];
     }
     if (!id) id = name;
     setItem({
@@ -105,69 +108,80 @@ export const UpsertProduct = (props: upsertProps) => {
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Stack spacing={2} p={1}>
-          <TextField id='name' label='Name' required fullWidth value={item?.name} onChange={modifyItem} />
-          <Autocomplete
-            value={item?.categories?.name ?? ''}
-            onChange={(_, newValue) => {
-              setItem({
-                ...item,
-                categories: newValue,
-              });
-            }}
-            filterOptions={(options, params) => {
-              const filtered = filter(options, params);
-              const { inputValue } = params;
-              // Suggest the creation of a new value
-              const isExisting = options.some((option) => inputValue === option.name);
-              if (inputValue !== '' && !isExisting) {
-                filtered.push({
-                  inputValue,
-                  name: `Add "${inputValue}"`,
-                });
-              }
-              return filtered;
-            }}
-            selectOnFocus
-            clearOnBlur
-            handleHomeEndKeys
-            id='category_id'
-            options={categories ?? []}
-            getOptionLabel={(option) => {
-              // Value selected with enter, right from the input
-              if (typeof option === 'string') {
-                return option;
-              }
-              // Add "xxx" option created dynamically
-              if (option.inputValue) {
-                return option.inputValue;
-              }
-              return option.name;
-            }}
-            renderOption={({ key, ...rest }: any, option) => (
-              <li key={key} {...rest}>
-                {option.name}
-              </li>
-            )}
-            fullWidth
-            freeSolo
-            renderInput={(params) => <TextField {...params} label='Category' />}
-          />
-          <TextField id='price' label='Price' required fullWidth value={item?.price} onChange={modifyItem} />
-          <TextField id='base_uom' label='UOM' required fullWidth value={item?.base_uom} onChange={modifyItem} />
-          <TextField
-            id='image_src'
-            label='ImageLink'
-            required
-            fullWidth
-            value={item?.image_src ?? ''}
-            onChange={modifyItem}
-          />
-          <Divider />
-          <Typography>Preview</Typography>
-          <ItemCard {...(item as ItemCardProps)} />
-          <Divider />
-        </Stack>
+        <Grid2 container spacing={2}>
+          <Grid2 xs={6}>
+            <Stack spacing={2}>
+              <TextField id='name' label='Name' required fullWidth value={item?.name} onChange={modifyItem} />
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={item?.is_out_of_stock}
+                      id='is_out_of_stock'
+                      onChange={(e) =>
+                        modifyItem({
+                          target: { id: 'is_out_of_stock', value: !e.target.checked },
+                        } as any)
+                      }
+                      sx={{ mt: 1 }}
+                    />
+                  }
+                  label={'Out of Stock'}
+                />
+              </FormGroup>
+              <Autocomplete
+                value={item?.categories?.name ?? ''}
+                onChange={(_, newValue) => {
+                  setItem({
+                    ...item,
+                    categories: newValue,
+                  });
+                }}
+                filterOptions={(options, params) => {
+                  const filtered = filter(options, params);
+                  const { inputValue } = params;
+                  // Suggest the creation of a new value
+                  const isExisting = options.some((option) => inputValue === option.name);
+                  if (inputValue !== '' && !isExisting) {
+                    filtered.push({
+                      inputValue,
+                      name: `Add "${inputValue}"`,
+                    });
+                  }
+                  return filtered;
+                }}
+                selectOnFocus
+                clearOnBlur
+                handleHomeEndKeys
+                id='category_id'
+                options={categories || []}
+                getOptionLabel={(option) => {
+                  if (typeof option === 'string') return option;
+                  if (option.inputValue) return option.inputValue;
+                  return option.name;
+                }}
+                renderOption={(props, option) => <li {...props}>{option.name}</li>}
+                fullWidth
+                freeSolo
+                renderInput={(params) => <TextField {...params} label='Category' />}
+              />
+              <TextField id='price' label='Price' required fullWidth value={item?.price} onChange={modifyItem} />
+              <TextField id='base_uom' label='UOM' required fullWidth value={item?.base_uom} onChange={modifyItem} />
+              <TextField
+                id='image_src'
+                label='ImageLink'
+                required
+                fullWidth
+                value={item?.image_src || ''}
+                onChange={modifyItem}
+              />
+            </Stack>
+          </Grid2>
+          <Grid2 xs={6}>
+            <Typography>Preview</Typography>
+            <ItemCard {...(item as ItemCardProps)} />
+          </Grid2>
+        </Grid2>
       </DialogContent>
       <DialogActions>
         {/* {isLoading && <CircularProgress />} */}

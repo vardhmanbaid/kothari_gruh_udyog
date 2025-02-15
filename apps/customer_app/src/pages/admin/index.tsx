@@ -21,9 +21,6 @@ export default function AdminHome() {
 
   return (
     <AppLayout
-      sx={{
-        width: '100vw',
-      }}
       childrenWrapperProps={{
         sx: {
           p: 2,
