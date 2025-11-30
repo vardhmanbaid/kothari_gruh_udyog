@@ -1,4 +1,4 @@
-import CrayondLogo from '@assets/crayondLogo.png';
+// import CrayondLogo from '@assets/crayondLogo.png';
 import { Button } from '@atoms/button';
 import { Input } from '@atoms/input';
 import { Label } from '@atoms/label';
@@ -38,7 +38,7 @@ export function Login(props: LoginProps): JSX.Element {
       {...rest}
     >
       <Box sx={loginStyle.cardContentSx}>
-        <Avatar src={CrayondLogo} sx={{ width: 44, height: 44, ml: -1 }} />
+        {/* <Avatar src={CrayondLogo} sx={{ width: 44, height: 44, ml: -1 }} /> */}
         <Typography sx={loginStyle.createPasswordSx}>Welcome</Typography>
         <Box sx={loginStyle.inputGroupSx}>
           <Label htmlFor='username'>Username</Label>

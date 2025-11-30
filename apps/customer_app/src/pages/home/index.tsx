@@ -5,6 +5,7 @@ import AamPappad from '@assets/Delicious.png';
 import Bhujiya from '@assets/items/parsumal_bhujiya.jpg';
 import Papad from '@assets/items/suman-papad.png';
 import Loya from '@assets/items/loya.png';
+import Fini from '@assets/fini.png';
 import Nagarmal from '@assets/nagarmal.png';
 import Carousel from 'react-material-ui-carousel';
 import { FiPhoneCall } from 'react-icons/fi';
@@ -23,6 +24,14 @@ const ProfileContact: Array<{ node: IconType; href: string }> = [
   { node: FaWhatsapp, href: `https://api.whatsapp.com/send?phone=${import.meta.env.VITE_NAGARMAL_NUMBER}` },
   { node: FaLocationDot, href: 'https://maps.app.goo.gl/6tpVpz4xqpmY883X6' },
   { node: FaRupeeSign, href: 'upi://pay?pa=vyapar.169688010748@hdfcbank&pn=Kothari%20Gruh%20Udyog&cu=INR' },
+];
+
+const carouselItems = [
+  // AamPappad,
+  Fini,
+  Bhujiya,
+  Papad,
+  Loya,
 ];
 
 export default function Home() {
@@ -49,7 +58,7 @@ export default function Home() {
             fullHeightHover
             navButtonsAlwaysInvisible
           >
-            {[AamPappad, Papad, Bhujiya, Loya].map((item: any, index: number) => (
+            {carouselItems.map((item: any, index: number) => (
               <Paper
                 elevation={0}
                 key={index + 1}
